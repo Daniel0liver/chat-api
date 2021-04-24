@@ -6,7 +6,7 @@
   "author": "Daniel Oliveira <danieloliver.dev@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "ts-node-dev src/server.ts",
+    "dev": "NODE_PATH=./src ts-node-dev ./src/server.ts",
     "typeorm": "ts-node-dev node_modules/typeorm/cli.js"
   },
   "dependencies": {

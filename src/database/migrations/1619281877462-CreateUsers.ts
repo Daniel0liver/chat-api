@@ -6,7 +6,7 @@ export class CreateUsers1619281877462 implements MigrationInterface {
       new Table({
         name: 'users',
         columns: [
-          { name: 'ID', type: 'uuid', isPrimary: true },
+          { name: 'id', type: 'uuid', isPrimary: true },
           {
             name: 'email',
             type: 'varchat',

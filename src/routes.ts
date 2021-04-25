@@ -1,19 +1,21 @@
 import { Router } from 'express';
-import { getCustomRepository } from 'typeorm';
 
 import { SettingsController } from 'controllers/SettingsController';
+import { UsersController } from 'controllers/UsersController';
 
 const routes = Router();
 
 const settingsController = new SettingsController();
+const usersController = new UsersController();
 
 routes.post('/settings', settingsController.create);
+routes.post('/users', usersController.create);
 
 export { routes };
 
 /*
  * Type params
- * Route Params: params od the routes
+ * Route Params: params of the routes
  * exemplo: http://localhost/settings/1
  *
  * Query params: Filter and search

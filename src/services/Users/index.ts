@@ -1,7 +1,7 @@
 import { getCustomRepository } from 'typeorm';
 import { UsersRepository } from 'repositories/UsersRepository';
 
-class UserService {
+class UsersService {
   async create(email: string) {
     const userRepository = getCustomRepository(UsersRepository);
 
@@ -21,4 +21,4 @@ class UserService {
   }
 }
 
-export { UserService };
+export { UsersService };

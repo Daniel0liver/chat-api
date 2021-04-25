@@ -1,5 +1,6 @@
+import { Message } from 'entities/Message';
 import { MessagesRepository } from 'repositories/MessagesRepository';
-import { getCustomRepository } from 'typeorm';
+import { getCustomRepository, Repository } from 'typeorm';
 
 interface IMessagesCreate {
   admin_id?: string;
@@ -8,24 +9,29 @@ interface IMessagesCreate {
 }
 
 class MessagesService {
-  async create({ admin_id, user_id, text }: IMessagesCreate) {
-    const messagesRepostory = getCustomRepository(MessagesRepository);
+  private messagesRepostory: Repository<Message>;
 
-    const message = messagesRepostory.create({
+  constructor() {
+    this.messagesRepostory = getCustomRepository(MessagesRepository);
+  }
+
+  async create({ admin_id, user_id, text }: IMessagesCreate) {
+    const message = this.messagesRepostory.create({
       admin_id,
       text,
       user_id,
     });
 
-    await messagesRepostory.save(message);
+    await this.messagesRepostory.save(message);
 
     return message;
   }
 
   async listByUser(user_id: string) {
-    const messageRepository = getCustomRepository(MessagesRepository);
-
-    const list = await messageRepository.find({ user_id });
+    const list = await this.messagesRepostory.find({
+      where: { user_id },
+      relations: ['user'],
+    });
 
     return list;
   }
